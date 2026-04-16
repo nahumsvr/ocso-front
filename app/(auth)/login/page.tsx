@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function LoginPage() {
     return (
         <div className="bg-gray-50 grid p-6 rounded-2xl gap-2 shadow-accent-soft">
-            <h1 className="text-2xl font-bold">Register</h1>
+            <h1 className="text-2xl font-bold">Login</h1>
             <TextField name="email" type="email" isRequired>
                 <Label>Email</Label>
                 <Input type="email" />
