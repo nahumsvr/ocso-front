@@ -3,18 +3,33 @@ import { API_URL } from "@/constants";
 import { Button, FieldError, Input, Label, TextField } from "@heroui/react";
 import axios from "axios";
 import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+    const [loading, setLoading] = useState(false);
+    const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true);
         const formData = new FormData(e.currentTarget);
-        const { data } = await axios.post(`${API_URL}/auth/signin`, {
-            userEmail: formData.get("email"),
-            userPassword: formData.get("password"),
-        }, {
-            withCredentials: true
-        })
-        console.log(data);
+        try {
+            const response = await axios.post(`${API_URL}/auth/signin`, {
+                userEmail: formData.get("email"),
+                userPassword: formData.get("password"),
+            }, {
+                withCredentials: true
+            })
+            if (response.status === 201) {
+                router.push("/dashboard");
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log(error.response?.data);
+            }
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -30,7 +45,9 @@ export default function LoginPage() {
                 <Input type="Password" />
                 <FieldError>Password is required</FieldError>
             </TextField>
-            <Button className="w-full" type="submit">Iniciar Sesión</Button>
+            <Button className="w-full" type="submit" isDisabled={loading}>
+                {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
+            </Button>
             <p>¿No tienes una cuenta? <Link href="/register" className="text-blue-800">Registrate</Link> </p>
         </form>
     )
