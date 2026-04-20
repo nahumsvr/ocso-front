@@ -4,12 +4,17 @@ import { Label, ListBox, Select } from "@heroui/react";
 import { Location } from "@/entities";
 import { useRouter } from "next/navigation";
 
-export default function SelectLocations({ locations }: { locations: Location[] }) {
+export default function SelectLocations({ locations, store }: { locations: Location[], store: string | string[] | undefined }) {
+  console.log(store, locations)
   const router = useRouter();
   return (
-    <Select className={"flex justify-center items-center"} placeholder="Selecciona" onChange={(e) => {
-      router.push(`/dashboard?store=${e}`)
-    }}>
+    <Select
+      className={"flex justify-center items-center"}
+      placeholder="Selecciona"
+      onChange={(e) => {
+        router.push(`/dashboard?store=${e}`)
+      }}
+    >
       <Label>Location</Label>
       <Select.Trigger className={"w-1/2"}>
         <Select.Value />
