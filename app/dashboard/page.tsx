@@ -4,9 +4,6 @@ export default function DashboardPage() {
             <div>
                 COL 1
             </div>
-            <div>
-                COL 2
-            </div>
         </div>
     )
 }

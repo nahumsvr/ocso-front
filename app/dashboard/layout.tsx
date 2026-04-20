@@ -1,7 +1,7 @@
 import Header from "./_components/Header";
 import SideBar from "./_components/_sidebar/Sidebar";
 
-export default function DashboardLayout({ children, count }: { children: React.ReactNode, count: React.ReactNode }) {
+export default function DashboardLayout({ children, locations }: { children: React.ReactNode, locations: React.ReactNode }) {
     return (
         <>
             <div className="w-screen h-screen bg-neutral-50">
@@ -9,7 +9,7 @@ export default function DashboardLayout({ children, count }: { children: React.R
                 <div className="flex flex-row">
                     <SideBar />
                     {children}
-                    {count}
+                    {locations}
                 </div>
             </div>
         </>

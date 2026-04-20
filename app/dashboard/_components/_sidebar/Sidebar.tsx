@@ -5,7 +5,7 @@ import NavItem from "./NavItem";
 
 export default function SideBar() {
     return (
-        <nav className="w-[10vw] h-[90dvh] bg-neutral-300 flex items-center flex-col">
+        <nav className="w-1/12 h-[90dvh] bg-neutral-300 flex items-center flex-col">
             <NavItem icon={<LuStore size={40} />} path="/dashboard" />
             <NavItem icon={<LuTruck size={40} />} path="/dashboard/providers" />
             <NavItem icon={<LuBox size={40} />} path="/dashboard/products" />
