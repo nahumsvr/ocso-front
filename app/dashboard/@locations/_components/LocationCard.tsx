@@ -1,6 +1,6 @@
 import { API_URL, TOKEN_NAME } from "@/constants";
 import { Location } from "@/entities";
-import { Card, CardContent, CardHeader } from "@heroui/react";
+import { Card, CardContent, CardHeader, Link } from "@heroui/react";
 import axios from "axios";
 import { cookies } from "next/headers";
 
@@ -23,7 +23,9 @@ export default async function LocationCArd({ store }: { store: string | string[]
         <b>Tienda: {location.locationName}</b>
       </CardHeader>
       <CardContent>
-        <p>Manager: <b>{location.manager?.managerFullname}</b></p>
+        <Link href={`/dashboard/employees`}>
+          <p>Manager: <b>{location.manager?.managerFullname}</b></p>
+        </Link>
       </CardContent>
     </Card>
   )
