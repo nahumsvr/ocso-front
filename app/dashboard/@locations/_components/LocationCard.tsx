@@ -17,15 +17,20 @@ export default async function LocationCArd({ store }: { store: string | string[]
 
   if (!location) return null;
   console.log(location)
+  const manager = location.manager?.managerFullname;
   return (
     <Card>
       <CardHeader>
         <b>Tienda: {location.locationName}</b>
       </CardHeader>
       <CardContent>
-        <Link href={`/dashboard/employees`}>
-          <p>Manager: <b>{location.manager?.managerFullname}</b></p>
-        </Link>
+        {manager ? (
+          <Link href={`/dashboard/employees`}>
+            <p>Manager: <b>{manager}</b></p>
+          </Link>
+        ) : (
+          <p>Manager: <b>Sin manager asignado</b></p>
+        )}
       </CardContent>
     </Card>
   )

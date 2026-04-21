@@ -24,8 +24,8 @@ export default async function EmployeesLocation({ store }: { store: string | str
           return <Card key={employee.employeeId} className="h-min">
             <CardHeader>
               <CardTitle>Nombre: <b>{fullName}</b></CardTitle>
-              <p>{employee.employeeEmail}</p>
-              <p>{employee.employeePhoneNumber}</p>
+              <p>Email: {employee.employeeEmail}</p>
+              <p>Telefono: {employee.employeePhoneNumber}</p>
             </CardHeader>
           </Card>
 

@@ -7,7 +7,7 @@ const LocationsPage = async ({ searchParams }: { searchParams: Promise<{ [key: s
     const store = (await searchParams)?.store;
     const { data } = await axios.get<Location[]>("http://localhost:3100/locations")
     return (
-        <div className="w-8/12">
+        <div className="w-8/12 p-4 flex flex-col gap-4">
             <SelectLocations locations={data} store={store} />
             <LocationCard store={store} />
         </div>
