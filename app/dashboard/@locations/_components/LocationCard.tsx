@@ -1,19 +1,17 @@
-import { API_URL, TOKEN_NAME } from "@/constants";
+import { API_URL } from "@/constants";
 import { Location } from "@/entities";
 import { Card, CardContent, CardHeader, Link } from "@heroui/react";
 import axios from "axios";
-import { cookies } from "next/headers";
+import DeleteLocations from "../../_components/DeleteLocations";
+import { AuthHeaders } from "@/helpers/authHeaders";
 
-export default async function LocationCArd({ store }: { store: string | string[] | undefined }) {
+export default async function LocationCArd({ store }: { store: string | undefined }) {
   if (!store) return null;
   if (store == "0") return null;
 
-  const token = (await cookies()).get(TOKEN_NAME)?.value;
 
   const location = await axios.get<Location>(`${API_URL}/locations/${store}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+    headers: await AuthHeaders()
   }).then(res => res.data).catch(err => console.log(err))
 
   if (!location) return null;
@@ -33,6 +31,9 @@ export default async function LocationCArd({ store }: { store: string | string[]
           <p>Manager: <b>Sin manager asignado</b></p>
         )}
       </CardContent>
+      <Card.Footer>
+        <DeleteLocations store={store} />
+      </Card.Footer>
     </Card>
   )
 }

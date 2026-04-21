@@ -1,26 +1,21 @@
 import { createLocation } from "@/actions.ts/create";
-import { API_URL, TOKEN_NAME } from "@/constants";
+import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
 import axios from "axios";
 import SelectManager from "./SelectManager";
-import { cookies } from "next/headers";
+import { AuthHeaders } from "@/helpers/authHeaders";
 
 export default async function FormNewLocation() {
-  const token = (await cookies()).get(TOKEN_NAME)?.value;
 
   const managers = await axios.get<Manager[]>(`${API_URL}/managers`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+    headers: await AuthHeaders()
   })
     .then(res => res.data)
     .catch(() => [])
 
   const locations = await axios.get<Location[]>(`${API_URL}/locations`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
+    headers: await AuthHeaders()
   })
     .then(res => res.data)
     .catch(() => [])
