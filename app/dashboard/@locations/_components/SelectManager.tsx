@@ -1,16 +1,18 @@
 "use client";
 
-import { Manager } from "@/entities";
+import { Location, Manager } from "@/entities";
 import { Label, ListBox, Select } from "@heroui/react";
 
-export default function SelectManager({ managers }: { managers: Manager[] }) {
+export default function SelectManager({ managers, locations }: { managers: Manager[], locations: Location[] }) {
+  const disabledManagers = locations
+    .map(location => location.manager?.managerId)
+    .filter(id => id !== undefined)
   return (
     <Select
+      name="manager"
       className={"flex justify-center items-center"}
-      placeholder="Selecciona"
-    // onChange={(e) => {
-    //   router.push(`/dashboard?store=${e}`)
-    // }}
+      placeholder="Selecciona manager"
+      disabledKeys={disabledManagers}
     >
       <Label>Managers</Label>
       <Select.Trigger className={"w-1/2"}>
