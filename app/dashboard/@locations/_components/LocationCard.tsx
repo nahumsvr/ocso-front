@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 
 export default async function LocationCArd({ store }: { store: string | string[] | undefined }) {
   if (!store) return null;
+  if (store == "0") return null;
 
   const token = (await cookies()).get(TOKEN_NAME)?.value;
 
@@ -16,7 +17,7 @@ export default async function LocationCArd({ store }: { store: string | string[]
   }).then(res => res.data).catch(err => console.log(err))
 
   if (!location) return null;
-  console.log(location)
+
   const manager = location.manager?.managerFullname;
   return (
     <Card>

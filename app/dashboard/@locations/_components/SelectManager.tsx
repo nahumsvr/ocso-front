@@ -1,21 +1,18 @@
 "use client";
 
+import { Manager } from "@/entities";
 import { Label, ListBox, Select } from "@heroui/react";
-import { Location } from "@/entities";
-import { useRouter } from "next/navigation";
 
-export default function SelectLocations({ locations, store }: { locations: Location[], store: string | string[] | undefined }) {
-  console.log(store, locations)
-  const router = useRouter();
+export default function SelectManager({ managers }: { managers: Manager[] }) {
   return (
     <Select
       className={"flex justify-center items-center"}
       placeholder="Selecciona"
-      onChange={(e) => {
-        router.push(`/dashboard?store=${e}`)
-      }}
+    // onChange={(e) => {
+    //   router.push(`/dashboard?store=${e}`)
+    // }}
     >
-      <Label>Location</Label>
+      <Label>Managers</Label>
       <Select.Trigger className={"w-1/2"}>
         <Select.Value />
         <Select.Indicator />
@@ -27,10 +24,10 @@ export default function SelectLocations({ locations, store }: { locations: Locat
             <ListBox.ItemIndicator />
           </ListBox.Item>
           {
-            locations.map(loc => {
+            managers.map(manager => {
               return (
-                <ListBox.Item key={loc.locationId} id={loc.locationId} textValue={loc.locationName}>
-                  {loc.locationName}
+                <ListBox.Item key={manager.managerId} id={manager.managerId} textValue={manager.managerFullname}>
+                  {manager.managerFullname}
                   <ListBox.ItemIndicator />
                 </ListBox.Item>
               )
