@@ -20,7 +20,7 @@ export default async function LocationCArd({ store }: { store: string | string[]
 
   const manager = location.manager?.managerFullname;
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
         <b>Tienda: {location.locationName}</b>
       </CardHeader>

@@ -10,12 +10,11 @@ export default function SelectManager({ managers, locations }: { managers: Manag
   return (
     <Select
       name="manager"
-      className={"flex justify-center items-center"}
       placeholder="Selecciona manager"
       disabledKeys={disabledManagers}
     >
       <Label>Managers</Label>
-      <Select.Trigger className={"w-1/2"}>
+      <Select.Trigger className="w-full">
         <Select.Value />
         <Select.Indicator />
       </Select.Trigger>

@@ -9,7 +9,7 @@ export default function SelectLocations({ locations, store }: { locations: Locat
   const router = useRouter();
   return (
     <Select
-      className={"flex justify-center items-center"}
+      className="flex justify-center items-center w-full"
       placeholder="Selecciona"
       onChange={(e) => {
         router.push(`/dashboard?store=${e}`)
