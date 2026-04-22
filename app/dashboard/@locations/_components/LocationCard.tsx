@@ -1,7 +1,6 @@
 import { API_URL } from "@/constants";
 import { Location } from "@/entities";
 import { Card, CardContent, CardHeader, Link } from "@heroui/react";
-import axios from "axios";
 import DeleteLocations from "../../_components/DeleteLocations";
 import { AuthHeaders } from "@/helpers/authHeaders";
 
@@ -9,10 +8,11 @@ export default async function LocationCArd({ store }: { store: string | undefine
   if (!store) return null;
   if (store == "0") return null;
 
-
-  const location = await axios.get<Location>(`${API_URL}/locations/${store}`, {
-    headers: await AuthHeaders()
-  }).then(res => res.data).catch(err => console.log(err))
+  const location: Location | undefined = await fetch(`${API_URL}/locations/${store}`, {
+    headers: await AuthHeaders(),
+  })
+    .then((res) => (res.ok ? res.json() : undefined))
+    .catch((err) => { console.log(err); return undefined; })
 
   if (!location) return null;
 

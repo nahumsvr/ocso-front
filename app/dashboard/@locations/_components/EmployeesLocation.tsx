@@ -2,15 +2,14 @@ import { API_URL } from "@/constants";
 import { Employee } from "@/entities";
 import { AuthHeaders } from "@/helpers/authHeaders";
 import { Card, CardHeader, CardTitle } from "@heroui/react";
-import axios from "axios";
 
 export default async function EmployeesLocation({ store }: { store: string | string[] | undefined }) {
   if (store == "0" || !store) return <p>Seleccione una locación</p>;
-  const data = await axios.get<Employee[]>(`${API_URL}/employees/location/${store}`, {
-    headers: await AuthHeaders()
+  const data: Employee[] | undefined = await fetch(`${API_URL}/employees/location/${store}`, {
+    headers: await AuthHeaders(),
   })
-    .then((response) => response.data)
-    .catch((error) => console.log(error))
+    .then((res) => (res.ok ? res.json() : undefined))
+    .catch((error) => { console.log(error); return undefined; })
 
   if (!data) return null;
 

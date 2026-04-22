@@ -2,23 +2,22 @@ import { createLocation } from "@/actions.ts/create";
 import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
-import axios from "axios";
 import SelectManager from "./SelectManager";
 import { AuthHeaders } from "@/helpers/authHeaders";
 
 export default async function FormNewLocation() {
 
-  const managers = await axios.get<Manager[]>(`${API_URL}/managers`, {
-    headers: await AuthHeaders()
+  const managers: Manager[] = await fetch(`${API_URL}/managers`, {
+    headers: await AuthHeaders(),
   })
-    .then(res => res.data)
-    .catch(() => [])
+    .then((res) => (res.ok ? res.json() : []))
+    .catch(() => []);
 
-  const locations = await axios.get<Location[]>(`${API_URL}/locations`, {
-    headers: await AuthHeaders()
+  const locations: Location[] = await fetch(`${API_URL}/locations`, {
+    headers: await AuthHeaders(),
   })
-    .then(res => res.data)
-    .catch(() => [])
+    .then((res) => (res.ok ? res.json() : []))
+    .catch(() => []);
 
   return (
     <Card className="w-full">

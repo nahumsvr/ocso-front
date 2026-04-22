@@ -2,7 +2,6 @@
 
 import { API_URL } from "@/constants";
 import { AuthHeaders } from "@/helpers/authHeaders";
-import axios from "axios";
 
 export async function createLocation(formData: FormData) {
   let location: any = {};
@@ -22,7 +21,12 @@ export async function createLocation(formData: FormData) {
 
   location.locationLatLong = locationLatLong;
 
-  await axios.post(`${API_URL}/locations`, location, {
-    headers: await AuthHeaders(),
+  await fetch(`${API_URL}/locations`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ...(await AuthHeaders()),
+    },
+    body: JSON.stringify(location),
   });
 }
