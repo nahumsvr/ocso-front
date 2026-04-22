@@ -2,6 +2,7 @@
 
 import { API_URL } from "@/constants";
 import { AuthHeaders } from "@/helpers/authHeaders";
+import { revalidateTag } from "next/cache";
 
 export async function createLocation(formData: FormData) {
   let location: any = {};
@@ -21,7 +22,7 @@ export async function createLocation(formData: FormData) {
 
   location.locationLatLong = locationLatLong;
 
-  await fetch(`${API_URL}/locations`, {
+  const response = await fetch(`${API_URL}/locations`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,4 +30,8 @@ export async function createLocation(formData: FormData) {
     },
     body: JSON.stringify(location),
   });
+
+  if (response.status === 201) {
+    revalidateTag("dashboard:locations", "cache");
+  }
 }

@@ -5,14 +5,15 @@ import { Card, CardHeader, CardTitle } from "@heroui/react";
 
 export default async function EmployeesLocation({ store }: { store: string | string[] | undefined }) {
   if (store == "0" || !store) return <p>Seleccione una locación</p>;
+
   const data: Employee[] | undefined = await fetch(`${API_URL}/employees/location/${store}`, {
     headers: await AuthHeaders(),
+    next: { tags: ["dashboard:locations:employees"] },
   })
     .then((res) => (res.ok ? res.json() : undefined))
     .catch((error) => { console.log(error); return undefined; })
 
   if (!data) return null;
-
 
   return (
     <>

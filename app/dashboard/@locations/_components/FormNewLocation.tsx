@@ -9,12 +9,18 @@ export default async function FormNewLocation() {
 
   const managers: Manager[] = await fetch(`${API_URL}/managers`, {
     headers: await AuthHeaders(),
+    next: {
+      tags: ["dashboard:managers"]
+    }
   })
     .then((res) => (res.ok ? res.json() : []))
     .catch(() => []);
 
   const locations: Location[] = await fetch(`${API_URL}/locations`, {
     headers: await AuthHeaders(),
+    next: {
+      tags: ["dashboard:locations"]
+    }
   })
     .then((res) => (res.ok ? res.json() : []))
     .catch(() => []);
