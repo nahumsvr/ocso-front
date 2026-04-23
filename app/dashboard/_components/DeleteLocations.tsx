@@ -14,7 +14,7 @@ export default function DeleteLocations({ store }: { store: string }) {
                 variant={"danger-soft"}
             >
                 <TrashBin />
-                Borrar tienda
+                Borrar
             </Button>
         </form>
     )

@@ -1,8 +1,9 @@
 import { API_URL } from "@/constants";
 import { Location } from "@/entities";
-import { Card, CardContent, CardHeader, Link } from "@heroui/react";
+import { Card, CardContent, CardHeader, Link, Separator } from "@heroui/react";
 import DeleteLocations from "../../_components/DeleteLocations";
 import { AuthHeaders } from "@/helpers/authHeaders";
+import { MapPin, Person } from "@gravity-ui/icons";
 
 export default async function LocationCArd({ store }: { store: string | undefined }) {
   if (!store) return null;
@@ -23,20 +24,29 @@ export default async function LocationCArd({ store }: { store: string | undefine
   return (
     <Card className="w-full">
       <CardHeader>
-        <b>Tienda: {location.locationName}</b>
+        <b>{location.locationName}</b>
       </CardHeader>
+      <Separator />
       <CardContent>
         {manager ? (
-          <Link href={`/dashboard/employees`}>
-            <p>Manager: <b>{manager}</b></p>
+          <Link href={`/dashboard/employees`} className="flex items-center gap-2">
+            <Person />
+            {manager}
           </Link>
         ) : (
-          <p>Manager: <b>Sin manager asignado</b></p>
+          <div className="flex items-center gap-2">
+            <Person />
+            Sin manager asignado
+          </div>
         )}
+        <div className="flex items-center gap-2">
+          <MapPin />
+          {location.locationAddres}
+        </div>
       </CardContent>
-      <Card.Footer>
+      {/* <Card.Footer>
         <DeleteLocations store={store} />
-      </Card.Footer>
+      </Card.Footer> */}
     </Card>
   )
 }

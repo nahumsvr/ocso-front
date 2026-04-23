@@ -1,11 +1,15 @@
 "use client";
 
+import { Pencil } from "@gravity-ui/icons";
 import { Button, Modal } from "@heroui/react";
 
 export default function UpdateLocation({ children }: { children: React.ReactNode }) {
   return (
     <Modal>
-      <Button variant="secondary">Actualizar</Button>
+      <Button variant="secondary">
+        <Pencil />
+        Actualizar
+      </Button>
       <Modal.Backdrop>
         <Modal.Container>
           <Modal.Dialog className="sm:max-w-[360px]">

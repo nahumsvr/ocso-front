@@ -4,6 +4,7 @@ import { Manager, Location } from "@/entities";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
 import SelectManager from "./SelectManager";
 import { AuthHeaders } from "@/helpers/authHeaders";
+import { Plus } from "@gravity-ui/icons";
 
 export default async function FormNewLocation() {
 
@@ -52,7 +53,10 @@ export default async function FormNewLocation() {
           <FieldError>La longitud es requerida</FieldError>
         </TextField>
         <SelectManager managers={managers} locations={locations}></SelectManager>
-        <Button type="submit" className="w-full">Crear</Button>
+        <Button type="submit" className="w-full flex items-center justify-center gap-2">
+          <Plus />
+          Crear
+        </Button>
       </form>
     </Card>
   )

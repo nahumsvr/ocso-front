@@ -1,10 +1,15 @@
 import { API_URL } from "@/constants";
 import { Employee } from "@/entities";
 import { AuthHeaders } from "@/helpers/authHeaders";
-import { Card, CardHeader, CardTitle } from "@heroui/react";
+import { Envelope, Handset, PersonWorker } from "@gravity-ui/icons";
+import { Card, CardHeader, CardTitle, Separator } from "@heroui/react";
 
 export default async function EmployeesLocation({ store }: { store: string | string[] | undefined }) {
-  if (store == "0" || !store) return <p>Seleccione una locación</p>;
+  if (store == "0" || !store) return (
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      <p className="text-lg text-neutral-500">Seleccione una locación para ver los empleados</p>
+    </div>
+  );
 
   const data: Employee[] | undefined = await fetch(`${API_URL}/employees/location/${store}`, {
     headers: await AuthHeaders(),
@@ -22,9 +27,19 @@ export default async function EmployeesLocation({ store }: { store: string | str
           const fullName = `${employee.employeeName} ${employee.employeeLastName}`;
           return <Card key={employee.employeeId} className="h-min">
             <CardHeader>
-              <CardTitle>Nombre: <b>{fullName}</b></CardTitle>
-              <p>Email: {employee.employeeEmail}</p>
-              <p>Telefono: {employee.employeePhoneNumber}</p>
+              <CardTitle className="flex items-center gap-2">
+                <PersonWorker />
+                <b>{fullName}</b>
+              </CardTitle>
+              <Separator />
+              <div className="flex items-center gap-2">
+                <Envelope />
+                {employee.employeeEmail}
+              </div>
+              <div className="flex items-center gap-2">
+                <Handset />
+                {employee.employeePhoneNumber}
+              </div>
             </CardHeader>
           </Card>
 

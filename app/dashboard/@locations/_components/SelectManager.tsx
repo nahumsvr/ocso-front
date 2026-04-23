@@ -10,15 +10,22 @@ interface SelectManagerProps {
 }
 
 export default function SelectManager({ managers, locations, defaultManager }: SelectManagerProps) {
+  let isUpdating = false;
   const disabledManagers = locations
-    .map(location => location.manager?.managerId)
+    .map(location => {
+      if (location.manager?.managerId != defaultManager) {
+        isUpdating = true;
+        return location.manager?.managerId
+      }
+    })
     .filter(id => id !== undefined)
+  console.log("default manager: ", defaultManager)
   return (
     <Select
       name="manager"
       placeholder="Selecciona manager"
       disabledKeys={disabledManagers}
-      defaultSelectedKey={defaultManager ? +defaultManager : 0}
+      defaultSelectedKey={defaultManager ? defaultManager : undefined}
     >
       <Label>Managers</Label>
       <Select.Trigger className="w-full">
@@ -27,10 +34,12 @@ export default function SelectManager({ managers, locations, defaultManager }: S
       </Select.Trigger>
       <Select.Popover>
         <ListBox>
-          <ListBox.Item key={0} id={0} textValue={"Ninguna"}>
-            Ninguna
-            <ListBox.ItemIndicator />
-          </ListBox.Item>
+          {!isUpdating &&
+            <ListBox.Item key={0} id={0} textValue={"Ninguna"}>
+              Ninguna
+              <ListBox.ItemIndicator />
+            </ListBox.Item>
+          }
           {
             managers.map(manager => {
               return (

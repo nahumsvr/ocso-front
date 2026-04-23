@@ -1,14 +1,14 @@
-import { createLocation } from "@/actions.ts/create";
+import { Button, FieldError, Input, Label, TextField } from "@heroui/react";
 import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
-import { Button, FieldError, Input, Label, TextField } from "@heroui/react";
 import SelectManager from "./SelectManager";
 import { AuthHeaders } from "@/helpers/authHeaders";
+import { updateLocation } from "@/actions.ts/update";
 
 export default async function FormUpdateLocation({ store }: { store: string | string[] | undefined }) {
     console.log("store: ", store)
-    if (!store) return
-
+    if (!store || store === undefined || typeof store === "object") return;
+    const updateLocationWithStore = updateLocation.bind(null, store);
     const managers: Manager[] = await fetch(`${API_URL}/managers`, {
         headers: await AuthHeaders(),
         next: {
@@ -31,7 +31,7 @@ export default async function FormUpdateLocation({ store }: { store: string | st
     let foundManager = managers.find(m => m.managerId == foundLocation?.manager?.managerId)
 
     return (
-        <form action={createLocation} className="flex flex-col gap-2">
+        <form action={updateLocationWithStore} className="flex flex-col gap-2">
             <TextField name="locationName" type="text" isRequired defaultValue={foundLocation?.locationName}>
                 <Label>Nombre de la tienda</Label>
                 <Input type="text" placeholder="Nombre de la tienda" />

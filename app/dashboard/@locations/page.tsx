@@ -6,6 +6,7 @@ import LocationCard from "./_components/LocationCard";
 import FormNewLocation from "./_components/FormNewLocation";
 import UpdateLocation from "./_components/UpdateLocations";
 import FormUpdateLocation from "./_components/FormUpdateLocation";
+import DeleteLocations from "../_components/DeleteLocations";
 
 const LocationsPage = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | undefined }> }) => {
     const store = (await searchParams)?.store;
@@ -20,9 +21,15 @@ const LocationsPage = async ({ searchParams }: { searchParams: Promise<{ [key: s
             <SelectLocations locations={data} store={store} />
             <LocationCard store={store} />
             {store == "0" && <FormNewLocation />}
-            {(store != "0" && store != undefined) && <UpdateLocation>
-                <FormUpdateLocation store={store} />
-            </UpdateLocation>}
+            {
+                (store != "0" && store != undefined) &&
+                <div className="flex flex-row gap-2">
+                    <UpdateLocation>
+                        <FormUpdateLocation store={store} />
+                    </UpdateLocation>
+                    <DeleteLocations store={store} />
+                </div>
+            }
         </div>
     )
 }
