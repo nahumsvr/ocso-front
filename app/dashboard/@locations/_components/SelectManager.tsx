@@ -3,7 +3,13 @@
 import { Location, Manager } from "@/entities";
 import { Label, ListBox, Select } from "@heroui/react";
 
-export default function SelectManager({ managers, locations }: { managers: Manager[], locations: Location[] }) {
+interface SelectManagerProps {
+  managers: Manager[],
+  locations: Location[],
+  defaultManager?: string
+}
+
+export default function SelectManager({ managers, locations, defaultManager }: SelectManagerProps) {
   const disabledManagers = locations
     .map(location => location.manager?.managerId)
     .filter(id => id !== undefined)
@@ -12,6 +18,7 @@ export default function SelectManager({ managers, locations }: { managers: Manag
       name="manager"
       placeholder="Selecciona manager"
       disabledKeys={disabledManagers}
+      defaultSelectedKey={defaultManager ? +defaultManager : 0}
     >
       <Label>Managers</Label>
       <Select.Trigger className="w-full">

@@ -1,8 +1,10 @@
 "use server";
 
 import { API_URL } from "@/constants";
+import { Location } from "@/entities";
 import { AuthHeaders } from "@/helpers/authHeaders";
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createLocation(formData: FormData) {
   let location: any = {};
@@ -31,7 +33,11 @@ export async function createLocation(formData: FormData) {
     body: JSON.stringify(location),
   });
 
-  if (response.status === 201) {
-    revalidateTag("dashboard:locations", "cache");
+  const data: Location = await response.json();
+  console.log(`/dashboard?store=${data.locationId}`);
+
+  if (response.ok) {
+    revalidateTag("dashboard:locations", "max");
+    redirect(`/dashboard?store=${data.locationId}`);
   }
 }

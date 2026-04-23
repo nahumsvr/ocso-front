@@ -11,7 +11,7 @@ export default async function LocationCArd({ store }: { store: string | undefine
   const location: Location | undefined = await fetch(`${API_URL}/locations/${store}`, {
     headers: await AuthHeaders(),
     next: {
-      tags: ["dashboard:locations", `dashboard:locations:${store}`]
+      tags: [`dashboard:locations:${store}`]
     }
   })
     .then((res) => (res.ok ? res.json() : undefined))
