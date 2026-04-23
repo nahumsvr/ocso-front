@@ -1,6 +1,5 @@
 "use client";
 
-import { Rocket } from "@gravity-ui/icons";
 import { Button, Modal } from "@heroui/react";
 
 export default function UpdateLocation({ children }: { children: React.ReactNode }) {

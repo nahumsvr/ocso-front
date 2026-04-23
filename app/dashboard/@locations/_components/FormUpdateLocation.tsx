@@ -1,10 +1,9 @@
 import { createLocation } from "@/actions.ts/create";
 import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
-import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
+import { Button, FieldError, Input, Label, TextField } from "@heroui/react";
 import SelectManager from "./SelectManager";
 import { AuthHeaders } from "@/helpers/authHeaders";
-import UpdateLocation from "./UpdateLocations";
 
 export default async function FormUpdateLocation({ store }: { store: string | string[] | undefined }) {
     console.log("store: ", store)
