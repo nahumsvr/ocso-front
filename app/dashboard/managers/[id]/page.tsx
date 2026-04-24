@@ -1,8 +1,7 @@
 import { API_URL } from "@/constants";
 import { Manager } from "@/entities";
 import { AuthHeaders } from "@/helpers/authHeaders";
-import { Envelope, Handset, MapPin, Person } from "@gravity-ui/icons";
-import { Card, Separator } from "@heroui/react";
+import { ManagerCard } from "./_components/ManagerCard";
 
 export default async function ManagerPage({ params }: { params: { id: string } }) {
   const { id } = await params;
@@ -17,28 +16,8 @@ export default async function ManagerPage({ params }: { params: { id: string } }
   if (!data) return null;
 
   return (
-    <Card key={data.managerId} className="h-fit w-full">
-      <Card.Header>
-        <Card.Title className="flex items-center gap-2">
-          <Person />
-          <b>{data.managerFullname}</b>
-        </Card.Title>
-      </Card.Header>
-      <Separator />
-      <Card.Content>
-        <div className="flex items-center gap-2">
-          <Envelope />
-          {data.managerEmail}
-        </div>
-        <div className="flex items-center gap-2">
-          <Handset />
-          {data.managerPhoneNumber}
-        </div>
-        <div className="flex items-center gap-2">
-          <MapPin />
-          {data.location?.locationName || "Sin locación asignada"}
-        </div>
-      </Card.Content>
-    </Card>
-  )
+    <div className="w-full h-full flex items-center justify-center">
+      <ManagerCard data={data} />
+    </div>
+  );
 }

@@ -16,7 +16,9 @@ const ManagersPage = async () => {
   const data: Manager[] = await res.json();
 
   return (
-    null
+    <div className="flex justify-center items-center w-full h-full text-gray-500 text-xl font-medium">
+      <h1>Para empezar, seleccione un administrador para ver sus detalles o cree uno nuevo.</h1>
+    </div>
   )
 }
 

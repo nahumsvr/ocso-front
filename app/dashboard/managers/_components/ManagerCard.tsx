@@ -16,7 +16,7 @@ export default async function ManagerCard() {
   if (!data) return null;
 
   return (
-    <div className="w-1/3 h-full flex flex-col gap-5 overflow-y-auto overflow-hidden">
+    <div className="w-[400px] h-full flex flex-col gap-5 overflow-y-auto overflow-hidden">
       {
         data.map((manager) => {
           return (
