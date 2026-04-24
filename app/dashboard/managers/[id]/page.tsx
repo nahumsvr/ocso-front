@@ -9,7 +9,7 @@ export default async function ManagerPage({ params }: { params: { id: string } }
 
   const res = await fetch(`${API_URL}/managers/${id}`, {
     headers: await AuthHeaders(),
-    next: { tags: [`dashboard:managers:${id}`] },
+    next: { tags: [`dashboard:managers:${id}`, "dashboard:managers"] },
   });
   if (!res.ok) return null;
 
