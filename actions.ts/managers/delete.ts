@@ -19,6 +19,6 @@ export default async function deleteManager(
 
   if (res.ok) {
     revalidateTag("dashboard:managers", "max");
-    redirect(`/dashboard`);
+    redirect(`/dashboard/managers`);
   }
 }

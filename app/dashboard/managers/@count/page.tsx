@@ -9,7 +9,6 @@ export default async function CountManagerPage() {
   })
 
   const data: Manager[] = await res.json()
-  console.log(data)
 
   const totalManagers = data.length;
   const totalInactiveManagers = data.filter(m => !m.location?.locationName).length;

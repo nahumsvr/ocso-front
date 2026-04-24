@@ -2,6 +2,7 @@
 import { Card, CardContent, CardHeader, Link, Separator } from "@heroui/react";
 import { Manager } from "@/entities";
 import { Envelope, Handset, MapPin, Person } from "@gravity-ui/icons";
+import DeleteManagerButton from "../../_components/DeleteManagerButton";
 
 export function ManagerCard({ data }: { data: Manager }) {
   return (
@@ -33,6 +34,9 @@ export function ManagerCard({ data }: { data: Manager }) {
               <span>Sin locación asignada</span>
             )
           }
+        </div>
+        <div className="flex items-center gap-2">
+          <DeleteManagerButton managerId={data.managerId} />
         </div>
       </CardContent>
     </Card>

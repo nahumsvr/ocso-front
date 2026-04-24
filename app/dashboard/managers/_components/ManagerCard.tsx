@@ -11,9 +11,9 @@ export default async function ManagerCard() {
     next: { tags: ["dashboard:managers"] },
   })
     .then((res) => (res.ok ? res.json() : undefined))
-    .catch((error) => { console.log(error); return undefined; })
+    .catch((error) => { console.log(error); return null; })
 
-  if (!data) return null;
+  if (data == undefined) return null;
 
   return (
     <div className="w-[400px] h-full flex flex-col gap-5 overflow-y-auto overflow-hidden">
