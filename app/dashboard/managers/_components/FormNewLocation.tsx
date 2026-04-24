@@ -1,12 +1,12 @@
-import { createLocation } from "@/actions.ts/locations/create";
+import { createManager } from "@/actions.ts/managers/create";
 import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
-import SelectManager from "./SelectManager";
 import { AuthHeaders } from "@/helpers/authHeaders";
 import { Plus } from "@gravity-ui/icons";
+import SelectLocation from "./SelectLocation";
 
-export default async function FormNewLocation() {
+export default async function FormNewManager() {
 
   const managers: Manager[] = await fetch(`${API_URL}/managers`, {
     headers: await AuthHeaders(),
@@ -31,11 +31,11 @@ export default async function FormNewLocation() {
       <Card.Header>
         <Card.Title> <b>Nueva tienda</b> </Card.Title>
       </Card.Header>
-      <form action={createLocation} className="flex flex-col gap-2">
-        <TextField name="locationName" type="text" isRequired>
-          <Label>Nombre de la tienda</Label>
-          <Input type="text" placeholder="Nombre de la tienda" />
-          <FieldError>La tienda es requerida</FieldError>
+      <form action={createManager} className="flex flex-col gap-2">
+        <TextField name="managerName" type="text" isRequired>
+          <Label>Nombre del manager</Label>
+          <Input type="text" placeholder="Nombre del manager" />
+          <FieldError>El manager es requerido</FieldError>
         </TextField>
         <TextField name="locationAddres" type="text" isRequired>
           <Label>Dirección</Label>
@@ -52,7 +52,7 @@ export default async function FormNewLocation() {
           <Input type="number" placeholder="123" />
           <FieldError>La longitud es requerida</FieldError>
         </TextField>
-        <SelectManager managers={managers} locations={locations}></SelectManager>
+        {/* <SelectLocation managers={managers} locations={locations}></SelectLocation> */}
         <Button type="submit" className="w-full flex items-center justify-center gap-2">
           <Plus />
           Crear
