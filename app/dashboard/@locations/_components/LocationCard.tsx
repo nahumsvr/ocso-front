@@ -29,7 +29,7 @@ export default async function LocationCArd({ store }: { store: string | undefine
       <Separator />
       <CardContent>
         {manager ? (
-          <Link href={`/dashboard/employees`} className="flex items-center gap-2">
+          <Link href={`/dashboard/managers/${location.manager?.managerId}`} className="flex items-center gap-2">
             <Person />
             {manager}
           </Link>
