@@ -6,7 +6,6 @@ import { AuthHeaders } from "@/helpers/authHeaders";
 import { updateLocation } from "@/actions.ts/update";
 
 export default async function FormUpdateLocation({ store }: { store: string | string[] | undefined }) {
-    console.log("store: ", store)
     if (!store || store === undefined || typeof store === "object") return;
     const updateLocationWithStore = updateLocation.bind(null, store);
     const managers: Manager[] = await fetch(`${API_URL}/managers`, {

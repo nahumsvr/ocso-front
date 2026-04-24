@@ -1,7 +1,6 @@
 import { API_URL } from "@/constants";
 import { Location } from "@/entities";
 import { Card, CardContent, CardHeader, Link, Separator } from "@heroui/react";
-import DeleteLocations from "../../_components/DeleteLocations";
 import { AuthHeaders } from "@/helpers/authHeaders";
 import { MapPin, Person } from "@gravity-ui/icons";
 

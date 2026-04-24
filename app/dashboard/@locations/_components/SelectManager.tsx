@@ -19,7 +19,6 @@ export default function SelectManager({ managers, locations, defaultManager }: S
       }
     })
     .filter(id => id !== undefined)
-  console.log("default manager: ", defaultManager)
   return (
     <Select
       name="manager"

@@ -15,7 +15,6 @@ export default async function ManagerPage({ params }: { params: { id: string } }
 
   const data: Manager = await res.json();
   if (!data) return null;
-  console.log(data);
 
   return (
     <Card key={data.managerId} className="h-fit w-full">

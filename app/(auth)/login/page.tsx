@@ -26,13 +26,9 @@ export default function LoginPage() {
                 router.push("/dashboard");
             } else {
                 const data = await response.json().catch(() => null);
-                console.log(data);
             }
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setLoading(false);
-        }
+        } catch (error) { console.log(error); }
+        finally { setLoading(false); }
     }
 
     return (

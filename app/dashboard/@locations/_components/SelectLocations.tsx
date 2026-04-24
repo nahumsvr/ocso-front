@@ -5,7 +5,6 @@ import { Location } from "@/entities";
 import { useRouter } from "next/navigation";
 
 export default function SelectLocations({ locations, store }: { locations: Location[], store: string | string[] | undefined }) {
-  console.log(store, locations)
   const router = useRouter();
   return (
     <Select

@@ -34,7 +34,6 @@ export async function createLocation(formData: FormData) {
   });
 
   const data: Location = await response.json();
-  console.log(`/dashboard?store=${data.locationId}`);
 
   if (response.ok) {
     revalidateTag("dashboard:locations", "max");

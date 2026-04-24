@@ -21,7 +21,6 @@ export async function updateLocation(store: string, formData: FormData) {
       location[key] = value;
     }
   }
-  console.log("location: ", location);
   location.locationLatLong = locationLatLong;
 
   const response = await fetch(`${API_URL}/locations/${store}`, {
@@ -34,7 +33,6 @@ export async function updateLocation(store: string, formData: FormData) {
   });
 
   const data: Location = await response.json();
-  console.log(`/dashboard?store=${data.locationId}`);
 
   if (response.ok) {
     revalidateTag("dashboard:locations", "max");
