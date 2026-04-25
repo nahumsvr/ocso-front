@@ -1,7 +1,7 @@
 // "use client"
 import { Card, CardContent, CardHeader, Link, Separator } from "@heroui/react";
 import { Manager } from "@/entities";
-import { Envelope, Handset, MapPin, Person } from "@gravity-ui/icons";
+import { CircleDollar, Envelope, Handset, MapPin, Person } from "@gravity-ui/icons";
 import DeleteManagerButton from "../../_components/DeleteManagerButton";
 import FormUpdateManager from "../../_components/FormUpdateManager";
 import UpdateManager from "../../_components/UpdateManager";
@@ -24,6 +24,10 @@ export function ManagerCard({ data }: { data: Manager }) {
         <div className="flex items-center gap-2">
           <Handset />
           {data.managerPhoneNumber}
+        </div>
+        <div className="flex items-center gap-2">
+          <CircleDollar />
+          ${data.managerSalary}
         </div>
         <div className="flex items-center gap-2">
           <MapPin />

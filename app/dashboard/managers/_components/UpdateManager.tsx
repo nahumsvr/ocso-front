@@ -15,16 +15,11 @@ export default function UpdateManager({ children }: { children: React.ReactNode 
           <Modal.Dialog className="sm:max-w-[360px]">
             <Modal.CloseTrigger />
             <Modal.Header>
-              {/* <Modal.Icon className="bg-default text-foreground">
-                <Rocket className="size-5" />
-              </Modal.Icon> */}
-              <Modal.Heading>Actualizar manager</Modal.Heading>
+              <Modal.Heading className="font-bold">Actualizar manager</Modal.Heading>
             </Modal.Header>
             <Modal.Body className="p-1">
               {children}
             </Modal.Body>
-            {/* <Modal.Footer>
-            </Modal.Footer> */}
           </Modal.Dialog>
         </Modal.Container>
       </Modal.Backdrop>
