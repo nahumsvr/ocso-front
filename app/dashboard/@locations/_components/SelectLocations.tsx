@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function SelectLocations({ locations, store }: { locations: Location[], store: string | string[] | undefined }) {
   const router = useRouter();
+  if (typeof store === "object") return;
   return (
     <Select
       className="flex justify-center items-center w-full"
@@ -13,6 +14,7 @@ export default function SelectLocations({ locations, store }: { locations: Locat
       onChange={(e) => {
         router.push(`/dashboard?store=${e}`)
       }}
+      defaultSelectedKey={store ? +store : undefined}
     >
       <Label>Location</Label>
       <Select.Trigger className={"w-1/2"}>
