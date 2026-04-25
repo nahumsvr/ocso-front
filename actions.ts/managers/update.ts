@@ -6,37 +6,36 @@ import { AuthHeaders } from "@/helpers/authHeaders";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function updateManager(manager: string, formData: FormData) {
-  let location: any = {};
-  let locationLatLong = [0, 0];
+export async function updateManager(managerId: string, formData: FormData) {
+  // console.log("managerId", managerId);
+  console.log("formData", formData);
+
+  let manager: any = {};
 
   for (const key of formData.keys()) {
     const value = formData.get(key);
     if (!value) continue;
-    if (key === "latitude") {
-      locationLatLong[0] = Number(value);
-    } else if (key === "longitude") {
-      locationLatLong[1] = Number(value);
-    } else {
-      location[key] = value;
-    }
+    manager[key] = value;
   }
-  location.locationLatLong = locationLatLong;
 
-  const response = await fetch(`${API_URL}/managers/${manager}`, {
+  console.log("manager con id:", manager);
+
+  const response = await fetch(`${API_URL}/managers/${managerId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       ...(await AuthHeaders()),
     },
-    body: JSON.stringify(location),
+    body: JSON.stringify(manager),
   });
+
+  console.log(response);
 
   const data: Manager = await response.json();
 
   if (response.ok) {
     revalidateTag("dashboard:managers", "max");
     revalidateTag(`dashboard:managers:${data.managerId}`, "max");
-    redirect(`/dashboard?manager=${data.managerId}`);
+    redirect(`/dashboard/managers/${data.managerId}`);
   }
 }
