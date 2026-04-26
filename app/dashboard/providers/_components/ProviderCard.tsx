@@ -4,7 +4,7 @@ import { Card, Separator } from "@heroui/react";
 
 export default function ProviderCard({ provider }: { provider: Provider }) {
     return (
-        <Card>
+        <Card className="w-[300px]">
             <Card.Header>
                 <Card.Title className="font-bold text-lg">{provider.providerName}</Card.Title>
             </Card.Header>
@@ -20,7 +20,7 @@ export default function ProviderCard({ provider }: { provider: Provider }) {
                 </div>
                 <div className="flex items-center gap-2">
                     <Box />
-                    {provider.products ? `${provider.products.length} productos` : "Sin stock"}
+                    {provider.products ? `${provider.products.length} producto${provider.products.length !== 1 ? 's' : ''}` : "Sin stock"}
                 </div>
             </Card.Content>
         </Card>

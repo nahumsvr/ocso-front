@@ -3,8 +3,8 @@ import { Provider } from "@/entities"
 import ProviderCard from "./_components/ProviderCard"
 import { AuthHeaders } from "@/helpers/authHeaders"
 import Link from "next/link"
-import { Plus } from "@gravity-ui/icons"
-import { Button } from "@heroui/react"
+import CreateProvider from "./[id]/CreateProvider"
+import FormCreateProvider from "./[id]/FormCreateProvider"
 
 const ProvierPage = async () => {
   const res = await fetch(`${API_URL}/providers/`, {
@@ -20,12 +20,11 @@ const ProvierPage = async () => {
   return (
     <div className="flex flex-col w-screen gap-4 p-10">
       <div className="w-full flex justify-end">
-        <Button>
-          <Plus />
-          Agregar proveedor
-        </Button>
+        <CreateProvider>
+          <FormCreateProvider />
+        </CreateProvider>
       </div>
-      <div className="flex w-[700px] gap-4">
+      <div className="flex gap-4 flex-wrap">
         {data.map((p) => (
           <Link
             href={`/dashboard/providers/${p.providerId}`}
