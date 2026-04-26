@@ -8,7 +8,10 @@ import FormCreateProvider from "./[id]/FormCreateProvider"
 
 const ProvierPage = async () => {
   const res = await fetch(`${API_URL}/providers/`, {
-    headers: await AuthHeaders()
+    headers: await AuthHeaders(),
+    next: {
+      tags: ["dashboard:providers"],
+    }
   })
     .catch((err) => { console.log(err); return null });
 
