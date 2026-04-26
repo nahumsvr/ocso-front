@@ -1,6 +1,7 @@
 import { Provider } from "@/entities";
 import { Box, Envelope, Handset } from "@gravity-ui/icons";
 import { Card, Separator } from "@heroui/react";
+import DeleteProviderForm from "../[id]/_components/DeleteProviderForm";
 
 export default function ProviderCard({ provider }: { provider: Provider }) {
     return (

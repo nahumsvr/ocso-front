@@ -1,6 +1,7 @@
 import { updateProvider } from "@/actions.ts/providers/update";
 import { Provider } from "@/entities";
 import { Button, Card, FieldError, Input, Label, Separator, TextField } from "@heroui/react";
+import DeleteProviderForm from "./DeleteProviderForm";
 
 export default function UpdateProviderForm({ provider }: { provider: Provider }) {
     const updateProviderWithId = updateProvider.bind(null, provider.providerId);
@@ -30,7 +31,10 @@ export default function UpdateProviderForm({ provider }: { provider: Provider })
                         <Input type="text" placeholder="5524002121" />
                         <FieldError>El teléfono es requerido</FieldError>
                     </TextField>
-                    <Button type="submit" className="w-full">Actualizar</Button>
+                    <div className="flex justify-end gap-2">
+                        <Button type="submit" className="w-full">Actualizar</Button>
+                        <DeleteProviderForm provider={provider} />
+                    </div>
                 </form>
             </Card.Content>
         </Card>
