@@ -1,0 +1,8 @@
+.mainGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    overflow: hidden;
+}
