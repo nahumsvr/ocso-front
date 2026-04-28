@@ -1,10 +1,10 @@
 import { Product } from "@/entities";
 import { Box, TagDollar, Trolley } from "@gravity-ui/icons";
-import { Card, Separator } from "@heroui/react";
+import { Card, Link, Separator } from "@heroui/react";
 
 export default function ProductCard({ product }: { product: Product }) {
     return (
-        <Card className="min-w-[300px] w-fit">
+        <Card className="min-w-[300px] w-fit h-full">
             <Card.Header>
                 <Card.Title>{product.productName}</Card.Title>
             </Card.Header>
@@ -18,10 +18,22 @@ export default function ProductCard({ product }: { product: Product }) {
                     <Box />
                     {product.countSeal}
                 </div>
-                <div className="flex items-center gap-2">
-                    <Trolley />
-                    {product.provider.providerName}
-                </div>
+                {
+                    product.provider ? (
+                        <div className="flex items-center gap-2">
+                            <Trolley />
+                            {/* <Link href={`/dashboard/providers/${product.provider.providerId}`}>
+                                {product.provider.providerName}
+                                </Link> */}
+                            {product.provider.providerName}
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2">
+                            <Trolley />
+                            Sin proveedor
+                        </div>
+                    )
+                }
             </Card.Content>
         </Card>
     )
