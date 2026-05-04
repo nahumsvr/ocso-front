@@ -1,5 +1,5 @@
 import { Button, FieldError, Input, Label, TextField } from "@heroui/react";
-import { createProvider } from "@/actions.ts/providers/create";
+import { createProvider } from "@/actions/providers/create";
 
 export default async function FormUpdateProvider() {
     return (

@@ -3,7 +3,7 @@
 import { TrashBin, TriangleExclamation } from "@gravity-ui/icons";
 import { Button, Input, Modal } from "@heroui/react";
 import { Product } from "@/entities";
-import deleteProduct from "@/actions.ts/products/delete";
+import deleteProduct from "@/actions/products/delete";
 
 export default function DeleteProduct({ product }: { product: Product }) {
     return (

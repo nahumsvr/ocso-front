@@ -2,7 +2,7 @@ import { Button, FieldError, Input, Label, TextField } from "@heroui/react";
 import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
 import { AuthHeaders } from "@/helpers/authHeaders";
-import { updateManager } from "@/actions.ts/managers/update";
+import { updateManager } from "@/actions/managers/update";
 import SelectLocation from "./SelectLocation";
 
 export default async function FormUpdateManager({ manager }: { manager: Manager }) {

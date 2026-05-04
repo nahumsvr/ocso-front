@@ -1,4 +1,4 @@
-import deleteLocation from "@/actions.ts/locations/delete";
+import deleteLocation from "@/actions/locations/delete";
 import { Button } from "@heroui/react";
 import { TrashBin } from "@gravity-ui/icons";
 

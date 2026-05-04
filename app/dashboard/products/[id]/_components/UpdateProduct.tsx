@@ -1,4 +1,4 @@
-import { updateProduct } from "@/actions.ts/products/update";
+import { updateProduct } from "@/actions/products/update";
 import { Product, Provider } from "@/entities";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
 import SelectProvider from "../../_components/SelectProviders";

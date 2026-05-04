@@ -1,4 +1,4 @@
-import { createLocation } from "@/actions.ts/locations/create";
+import { createLocation } from "@/actions/locations/create";
 import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";

@@ -1,4 +1,4 @@
-import deleteProvider from "@/actions.ts/providers/delete";
+import deleteProvider from "@/actions/providers/delete";
 import { Button, Input } from "@heroui/react";
 import { TrashBin } from "@gravity-ui/icons";
 

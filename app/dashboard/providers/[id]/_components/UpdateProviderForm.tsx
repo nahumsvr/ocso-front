@@ -1,4 +1,4 @@
-import { updateProvider } from "@/actions.ts/providers/update";
+import { updateProvider } from "@/actions/providers/update";
 import { Provider } from "@/entities";
 import { Button, Card, FieldError, Input, Label, Separator, TextField } from "@heroui/react";
 import DeleteProviderForm from "./DeleteProviderForm";

@@ -2,7 +2,7 @@ import { API_URL } from "@/constants";
 import { Employee } from "@/entities";
 import { AuthHeaders } from "@/helpers/authHeaders";
 import { Envelope, Handset, PersonWorker } from "@gravity-ui/icons";
-import { Card, CardHeader, CardTitle, Separator } from "@heroui/react";
+import { Card, CardHeader, CardTitle, Link, Separator } from "@heroui/react";
 
 export default async function EmployeesLocation({ store }: { store: string | string[] | undefined }) {
   if (store == "0" || !store) return (
@@ -29,7 +29,9 @@ export default async function EmployeesLocation({ store }: { store: string | str
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <PersonWorker />
-                <b>{fullName}</b>
+                <Link href={`/dashboard/employees/${employee.employeeId}`}>
+                  <b>{fullName}</b>
+                </Link>
               </CardTitle>
               <Separator />
               <div className="flex items-center gap-2">

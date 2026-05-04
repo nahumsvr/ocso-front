@@ -1,4 +1,4 @@
-import { createProduct } from "@/actions.ts/products/create";
+import { createProduct } from "@/actions/products/create";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
 import { API_URL } from "@/constants";
 import { Provider } from "@/entities";

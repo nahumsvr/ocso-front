@@ -3,7 +3,7 @@ import { API_URL } from "@/constants";
 import { Manager, Location } from "@/entities";
 import SelectManager from "./SelectManager";
 import { AuthHeaders } from "@/helpers/authHeaders";
-import { updateLocation } from "@/actions.ts/locations/update";
+import { updateLocation } from "@/actions/locations/update";
 
 export default async function FormUpdateLocation({ store }: { store: string | string[] | undefined }) {
     if (!store || store === undefined || typeof store === "object") return;
