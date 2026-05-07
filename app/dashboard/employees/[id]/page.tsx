@@ -72,9 +72,13 @@ const EmployeeCard = async ({ employee, children }: { employee: Employee, childr
                             <p>Sin ubicación asignada</p>
                         )}
                     </div>
-                    <CreateEmployeeModal>
-                        <CreateUserEmployeeForm employeeId={employee.employeeId} />
-                    </CreateEmployeeModal>
+                    {
+                        !employee.user && (
+                            <CreateEmployeeModal>
+                                <CreateUserEmployeeForm employeeId={employee.employeeId} />
+                            </CreateEmployeeModal>
+                        )
+                    }
                     <DeleteEmployee employee={employee} />
                 </div>
                 {children}
