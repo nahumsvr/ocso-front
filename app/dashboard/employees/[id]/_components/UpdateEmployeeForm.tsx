@@ -1,8 +1,27 @@
 import { updateEmployee } from "@/actions/employees/update";
-import { Employee } from "@/entities";
+import { Employee, Location } from "@/entities";
 import { Button, Card, FieldError, Input, Label, TextField } from "@heroui/react";
+import SelectLocation from "./SelectLocation";
+import { API_URL } from "@/constants";
+import { AuthHeaders } from "@/helpers/authHeaders";
 
-export default function UpdateEmployeeForm({ employee }: { employee: Employee }) {
+export default async function UpdateEmployeeForm({ employee }: { employee: Employee }) {
+    const locations: Location[] = await fetch(`${API_URL}/locations`, {
+        headers: await AuthHeaders(),
+        next: {
+            tags: ["dashboard:employees", `dashboard:employees:${employee.employeeId}`]
+        }
+    })
+        .then(async (res) => {
+            if (!res.ok) {
+                throw new Error("Error al obtener las sucursales");
+            }
+            return res.json();
+        })
+        .catch((error) => {
+            console.error(error);
+            return [];
+        });
     if (!employee) return null;
     const updateEmployeeWithId = updateEmployee.bind(null, employee.employeeId);
 
@@ -33,6 +52,7 @@ export default function UpdateEmployeeForm({ employee }: { employee: Employee })
                         <Input type="email" placeholder="example@mail.com" />
                         <FieldError>El email es requerido</FieldError>
                     </TextField>
+                    <SelectLocation locations={locations} defaultStore={employee.location?.locationId} />
                     <Label>Foto</Label>
                     <Input type="file" name="employeePhotoUrl" accept="image/*" />
                     <Button type="submit" className="w-full">Actualizar</Button>

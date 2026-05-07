@@ -5,6 +5,9 @@ import Image from "next/image";
 import UpdateEmployeeForm from "./_components/UpdateEmployeeForm";
 import { Card, Link, Separator } from "@heroui/react";
 import { Envelope, Handset, MapPin } from "@gravity-ui/icons";
+import CreateEmployeeModal from "../_components/CreateEmployeeModal";
+import CreateUserEmployeeForm from "./_components/FormCreateEmployeeUser";
+import DeleteEmployee from "./_components/DeleteEmployee";
 
 
 export default async function EmployeePage({ params }: { params: Promise<{ id: string }> }) {
@@ -69,6 +72,10 @@ const EmployeeCard = async ({ employee, children }: { employee: Employee, childr
                             <p>Sin ubicación asignada</p>
                         )}
                     </div>
+                    <CreateEmployeeModal>
+                        <CreateUserEmployeeForm employeeId={employee.employeeId} />
+                    </CreateEmployeeModal>
+                    <DeleteEmployee employee={employee} />
                 </div>
                 {children}
             </Card.Content>
