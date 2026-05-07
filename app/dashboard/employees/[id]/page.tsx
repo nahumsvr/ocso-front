@@ -8,6 +8,8 @@ import { Envelope, Handset, MapPin } from "@gravity-ui/icons";
 import CreateEmployeeModal from "../_components/CreateEmployeeModal";
 import CreateUserEmployeeForm from "./_components/FormCreateEmployeeUser";
 import DeleteEmployee from "./_components/DeleteEmployee";
+import UpdateUserModal from "./_components/UpdateUserModal";
+import UpdateEmployeeUserForm from "./_components/FormUpdateEmployeeUser";
 
 
 export default async function EmployeePage({ params }: { params: Promise<{ id: string }> }) {
@@ -73,10 +75,14 @@ const EmployeeCard = async ({ employee, children }: { employee: Employee, childr
                         )}
                     </div>
                     {
-                        !employee.user && (
+                        !employee.user ? (
                             <CreateEmployeeModal>
                                 <CreateUserEmployeeForm employeeId={employee.employeeId} />
                             </CreateEmployeeModal>
+                        ) : (
+                            <UpdateUserModal>
+                                <UpdateEmployeeUserForm employee={employee} />
+                            </UpdateUserModal>
                         )
                     }
                     <DeleteEmployee employee={employee} />

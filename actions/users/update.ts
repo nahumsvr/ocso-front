@@ -1,23 +1,32 @@
 "use server";
 
 import { API_URL } from "@/constants";
-import { Employee } from "@/entities";
+import { Employee, User } from "@/entities";
 import { AuthHeaders } from "@/helpers/authHeaders";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function updateEmployee(employeeId: string, formData: FormData) {
-  const response = await fetch(`${API_URL}/employees/${employeeId}`, {
+export async function updateEmployee(employee: Employee, formData: FormData) {
+  let data = {
+    userEmail: formData.get("userEmail") ?? undefined,
+    userPassword: formData.get("userPassword") ?? undefined,
+    // userRoles: ["Employee"],
+  };
+
+  console.log("Employee ID: ", employee.user.userId);
+  console.log("Data: ", data);
+
+  const response = await fetch(`${API_URL}/auth/${employee.user.userId}/`, {
     method: "PATCH",
-    headers: await AuthHeaders(),
-    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+      ...(await AuthHeaders()),
+    },
+    body: JSON.stringify(data),
   });
 
-  const data: Employee = await response.json();
+  const responseData: Employee = await response.json();
 
-  if (response.ok) {
-    revalidateTag("dashboard:employees", "max");
-    revalidateTag(`dashboard:employees:${data.employeeId}`, "max");
-    redirect(`/dashboard/employees/${data.employeeId}`);
-  }
+  console.log("Response Data: ", responseData);
+  redirect(`/dashboard/employees/${employee.employeeId}`);
 }
