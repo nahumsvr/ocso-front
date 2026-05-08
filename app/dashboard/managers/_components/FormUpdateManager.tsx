@@ -37,10 +37,8 @@ export default async function FormUpdateManager({ manager }: { manager: Manager 
                 <Input type="number" placeholder="200" />
                 <FieldError>El sueldo es requerido</FieldError>
             </TextField>
-            <div className="flex flex-col gap-2">
-                <SelectLocation locations={locations} defaultStore={manager.location?.locationId} />
-                <Button type="submit" className="w-full">Actualizar</Button>
-            </div>
+            <SelectLocation locations={locations} defaultStore={manager.location?.locationId} />
+            <Button type="submit" className="w-full">Actualizar</Button>
         </form>
     )
 }

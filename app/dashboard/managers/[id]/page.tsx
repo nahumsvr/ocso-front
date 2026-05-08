@@ -6,6 +6,7 @@ import { ManagerCard } from "./_components/ManagerCard";
 export default async function ManagerPage({ params }: { params: { id: string } }) {
   const { id } = await params;
 
+
   const res = await fetch(`${API_URL}/managers/${id}`, {
     headers: await AuthHeaders(),
     next: { tags: [`dashboard:managers:${id}`, "dashboard:managers"] },

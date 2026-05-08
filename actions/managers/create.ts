@@ -8,22 +8,21 @@ import { redirect } from "next/navigation";
 
 export async function createManager(formData: FormData) {
   let manager: any = {};
-  let locationLatLong = [0, 0];
 
   for (const key of formData.keys()) {
     const value = formData.get(key);
     if (!value) continue;
-    if (key === "latitude") {
-      locationLatLong[0] = Number(value);
-    } else if (key === "longitude") {
-      locationLatLong[1] = Number(value);
+    if (key === "location") {
+      const locationId = Number(value);
+      if (locationId !== 0) {
+        manager[key] = locationId;
+      }
     } else {
       manager[key] = value;
     }
   }
 
-  manager.locationLatLong = locationLatLong;
-
+  console.log(manager);
   const response = await fetch(`${API_URL}/managers`, {
     method: "POST",
     headers: {
@@ -34,9 +33,13 @@ export async function createManager(formData: FormData) {
   });
 
   const data: Manager = await response.json();
+  console.log(data);
 
   if (response.ok) {
     revalidateTag("dashboard:managers", "max");
-    redirect(`/dashboard?manager=${data.managerId}`);
+    revalidateTag(`dashboard:managers:${data.managerId}`, "max");
+    redirect(`/dashboard/managers/${data.managerId}`);
+  } else {
+    redirect(`/dashboard/managers`);
   }
 }

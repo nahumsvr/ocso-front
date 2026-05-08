@@ -5,6 +5,8 @@ import { CircleDollar, Envelope, Handset, MapPin, Person } from "@gravity-ui/ico
 import DeleteManagerButton from "../../_components/DeleteManagerButton";
 import FormUpdateManager from "../../_components/FormUpdateManager";
 import UpdateManager from "../../_components/UpdateManager";
+import ModalComponent from "@/app/dashboard/_components/Modal";
+import CreateManagerUser from "./FormCreateUser";
 
 export function ManagerCard({ data }: { data: Manager }) {
   return (
@@ -47,7 +49,11 @@ export function ManagerCard({ data }: { data: Manager }) {
         <UpdateManager>
           <FormUpdateManager manager={data} />
         </UpdateManager>
-
+        {!data.user ? (
+          <ModalComponent icon={<Person />} title="Crear usuario" buttonLabel="Crear usuario">
+            <CreateManagerUser employeeId={data.managerId} />
+          </ModalComponent>
+        ) : null}
       </Card.Footer>
     </Card>
   )
