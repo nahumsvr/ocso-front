@@ -3,11 +3,11 @@ import { Button, FieldError, Input, InputGroup, Label, TextField } from "@heroui
 import { useState } from "react";
 import generator from "generate-password";
 import { Eye, EyeSlash } from "@gravity-ui/icons";
-import { updateEmployee } from "@/actions/users/update";
-import { Employee } from "@/entities";
+import { Manager } from "@/entities";
+import { updateManager } from "@/actions/users/update";
 
-export default function UpdateEmployeeUserForm({ employee }: { employee: Employee }) {
-    const updateEmployeeUserById = updateEmployee.bind(null, employee);
+export default function UpdateUserForm({ manager }: { manager: Manager }) {
+    const updateManagerUserById = updateManager.bind(null, manager);
     const [password, setPassword] = useState<string>("");
     const generatePassword = () => {
         const password = generator.generate({
@@ -21,8 +21,8 @@ export default function UpdateEmployeeUserForm({ employee }: { employee: Employe
     }
 
     return (
-        <form className="flex flex-col gap-2" action={updateEmployeeUserById}>
-            <TextField name="userEmail" type="text" defaultValue={employee.user.userEmail}>
+        <form className="flex flex-col gap-2" action={updateManagerUserById}>
+            <TextField name="userEmail" type="text" defaultValue={manager?.user?.userEmail}>
                 <Label>Correo electrónico</Label>
                 <Input type="email" placeholder="example@mail.com" />
                 <FieldError>El correo es requerido</FieldError>
@@ -45,7 +45,11 @@ function PasswordWithToggle({ password, setPassword }: { password: string, setPa
                     className="w-full"
                     type={isVisible ? "text" : "password"}
                     value={isVisible ? password : "••••••••"}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                        if (isVisible) {
+                            setPassword(e.target.value);
+                        }
+                    }}
                 />
                 <InputGroup.Suffix className="pr-0">
                     <Button

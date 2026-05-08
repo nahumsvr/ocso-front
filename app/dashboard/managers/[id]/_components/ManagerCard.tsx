@@ -1,12 +1,13 @@
 // "use client"
 import { Card, CardContent, CardHeader, Link, Separator } from "@heroui/react";
 import { Manager } from "@/entities";
-import { CircleDollar, Envelope, Handset, MapPin, Person } from "@gravity-ui/icons";
+import { CircleDollar, Envelope, Handset, MapPin, Pencil, Person } from "@gravity-ui/icons";
 import DeleteManagerButton from "../../_components/DeleteManagerButton";
-import FormUpdateManager from "../../_components/FormUpdateManager";
 import UpdateManager from "../../_components/UpdateManager";
 import ModalComponent from "@/app/dashboard/_components/Modal";
 import CreateManagerUser from "./FormCreateUser";
+import FormUpdateManager from "./FormUpdateManager";
+import FormUpdateUser from "./FormUpdateUser";
 
 export function ManagerCard({ data }: { data: Manager }) {
   return (
@@ -53,7 +54,11 @@ export function ManagerCard({ data }: { data: Manager }) {
           <ModalComponent icon={<Person />} title="Crear usuario" buttonLabel="Crear usuario">
             <CreateManagerUser employeeId={data.managerId} />
           </ModalComponent>
-        ) : null}
+        ) : (
+          <ModalComponent icon={<Pencil />} title="Actualizar usuario" buttonLabel="Actualizar usuario">
+            <FormUpdateUser manager={data} />
+          </ModalComponent>
+        )}
       </Card.Footer>
     </Card>
   )

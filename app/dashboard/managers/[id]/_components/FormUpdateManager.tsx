@@ -1,64 +1,44 @@
-"use client";
-import { Button, FieldError, Input, InputGroup, Label, TextField } from "@heroui/react";
-import { useState } from "react";
-import generator from "generate-password";
-import { Eye, EyeSlash } from "@gravity-ui/icons";
-import { updateEmployee } from "@/actions/users/update";
-import { Employee } from "@/entities";
+import { Button, FieldError, Input, Label, TextField } from "@heroui/react";
+import { API_URL } from "@/constants";
+import { Manager, Location } from "@/entities";
+import { AuthHeaders } from "@/helpers/authHeaders";
+import { updateManager } from "@/actions/managers/update";
+import SelectLocation from "../../_components/SelectLocation";
 
-export default function FormUpdateManager({ employee }: { employee: Employee }) {
-    const updateEmployeeUserById = updateEmployee.bind(null, employee);
-    const [password, setPassword] = useState<string>("");
-    const generatePassword = () => {
-        const password = generator.generate({
-            length: 10,
-            numbers: true,
-            symbols: true,
-            uppercase: true,
-            lowercase: true,
-        });
-        setPassword(password);
-    }
+export default async function FormUpdateManager({ manager }: { manager: Manager }) {
+    if (!manager) return null;
+    const updateManagerWithId = updateManager.bind(null, manager.managerId);
+
+    const res = await fetch(`${API_URL}/locations`, {
+        method: "GET",
+        headers: await AuthHeaders(),
+    })
+    const locations: Location[] = await res.json();
 
     return (
-        <form className="flex flex-col gap-2" action={updateEmployeeUserById}>
-            <TextField name="userEmail" type="text" defaultValue={employee.user.userEmail}>
-                <Label>Correo electrónico</Label>
-                <Input type="email" placeholder="example@mail.com" />
-                <FieldError>El correo es requerido</FieldError>
+        <form action={updateManagerWithId} className="flex flex-col gap-2">
+            <TextField name="managerFullname" type="text" isRequired defaultValue={manager?.managerFullname}>
+                <Label>Nombre</Label>
+                <Input type="text" placeholder="Nombre del manager" />
+                <FieldError>El manager es requerido</FieldError>
             </TextField>
-            <PasswordWithToggle password={password} setPassword={setPassword} />
-            <Button type="button" className="w-full" variant="secondary" onClick={generatePassword}>Generar contraseña</Button>
+            <TextField name="managerEmail" type="text" isRequired defaultValue={manager?.managerEmail}>
+                <Label>Email</Label>
+                <Input type="text" placeholder="example@mail.com" />
+                <FieldError>El email es requerido</FieldError>
+            </TextField>
+            <TextField name="managerPhoneNumber" type="text" isRequired defaultValue={manager?.managerPhoneNumber}>
+                <Label>Teléfono</Label>
+                <Input type="text" placeholder="70000000" />
+                <FieldError>El teléfono es requerido</FieldError>
+            </TextField>
+            <TextField name="managerSalary" type="number" isRequired defaultValue={String(manager?.managerSalary)}>
+                <Label>Sueldo</Label>
+                <Input type="number" placeholder="200" />
+                <FieldError>El sueldo es requerido</FieldError>
+            </TextField>
+            <SelectLocation locations={locations} defaultStore={manager.location?.locationId} />
             <Button type="submit" className="w-full">Actualizar</Button>
         </form>
     )
-}
-
-
-function PasswordWithToggle({ password, setPassword }: { password: string, setPassword: (password: string) => void }) {
-    const [isVisible, setIsVisible] = useState(true);
-    return (
-        <TextField className="w-full" name="userPassword">
-            <Label>Password</Label>
-            <InputGroup>
-                <InputGroup.Input
-                    className="w-full"
-                    type={isVisible ? "text" : "password"}
-                    value={isVisible ? password : "••••••••"}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <InputGroup.Suffix className="pr-0">
-                    <Button
-                        isIconOnly
-                        aria-label={isVisible ? "Hide password" : "Show password"}
-                        size="sm"
-                        variant="ghost"
-                        onPress={() => setIsVisible(!isVisible)}
-                    >
-                        {isVisible ? <Eye className="size-4" /> : <EyeSlash className="size-4" />}
-                    </Button>
-                </InputGroup.Suffix>
-            </InputGroup>
-        </TextField>
-    );
 }
